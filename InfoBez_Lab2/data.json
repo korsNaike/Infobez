@@ -1,29 +1,55 @@
 {
-  "subjects": [
-    {
-      "name": "Bill",
-      "id": 1
-    },
-    {
-      "name": "Jane",
-      "id": 2
-    }
-  ],
-  "accessRecords": [
-    {
-      "subject_id": 1,
-      "object_id": 1,
-      "access": "r"
-    },
-    {
-      "subject_id": 1,
-      "object_id": 2,
-      "access": "w"
-    },
-    {
-      "subject_id": 2,
-      "object_id": 2,
-      "access": "r"
-    }
-  ]
+    "accessRecords": [
+        {
+            "access": 114,
+            "object_id": 1,
+            "subject_id": 1
+        },
+        {
+            "access": 119,
+            "object_id": 2,
+            "subject_id": 1
+        },
+        {
+            "access": 114,
+            "object_id": 2,
+            "subject_id": 2
+        },
+        {
+            "access": 119,
+            "object_id": 1,
+            "subject_id": 3
+        },
+        {
+            "access": 119,
+            "object_id": 1,
+            "subject_id": 5
+        }
+    ],
+    "subjects": [
+        {
+            "id": 1,
+            "name": "Bill"
+        },
+        {
+            "id": 2,
+            "name": "Jane"
+        },
+        {
+            "id": 3,
+            "name": "Pokemon"
+        },
+        {
+            "id": 4,
+            "name": "Flexich"
+        },
+        {
+            "id": 5,
+            "name": "Pokemon"
+        },
+        {
+            "id": 6,
+            "name": "Flexich"
+        }
+    ]
 }

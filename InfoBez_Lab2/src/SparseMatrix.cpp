@@ -21,11 +21,12 @@ namespace std {
 class SparseMatrix {
 private:
     int n, m;
-    std::unordered_map<std::pair<int, int>, std::unordered_set<Access>, std::hash<std::pair<int, int>>> data;
 
     int currentId;
 
 public:
+    std::unordered_map<std::pair<int, int>, std::unordered_set<Access>, std::hash<std::pair<int, int>>> data;
+
     std::unordered_map<int, std::string> subjects; // Ñóáúåêòû
 
     SparseMatrix(int n, int m) : n(n), m(m), currentId(1) {}

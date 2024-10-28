@@ -10,13 +10,13 @@ project (
 )
 
 include_directories (src)
-
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
 file(GLOB_RECURSE HEADERS RELATIVE ${CMAKE_SOURCE_DIR} "src/*.h")
 
 add_executable(main ${SOURCES} ${HEADERS})
 
 include(FetchContent)
+
 FetchContent_Declare(
     nlohmann_json
     GIT_REPOSITORY https://github.com/nlohmann/json

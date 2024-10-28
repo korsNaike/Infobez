@@ -50,7 +50,7 @@ private:
         for (const auto& item : accessRecords) {
             int object_id = item["object_id"];
             int subject_id = item["subject_id"];
-            char accessChar = item["access"].get<std::string>()[0];
+            char accessChar = item["access"].get<char>();
             Access access = (accessChar == 'r') ? Access::READ : Access::WRITE;
 
             records.push_back({ object_id, subject_id, access });
@@ -83,20 +83,48 @@ public:
         this->filename = filename;
     }
 
-    SparseMatrix read() {
+    void read(SparseMatrix& matrix) {
         auto recordsAndSubjects = readDataFromFile(this->filename);
         auto records = recordsAndSubjects.first;
         auto subjects = recordsAndSubjects.second;
-        auto maxColAndRow = getMaxObjectIdAndSubjectId(records);
 
-        SparseMatrix matrix(maxColAndRow.second, maxColAndRow.first);
         for (auto subject : subjects) {
             matrix.addSubject(subject.name, subject.id);
         }
         for (auto record : records) {
             matrix.editCell(record.subject_id, record.object_id, record.access, true);
         }
+    }
 
-        return matrix;
+    void write(SparseMatrix& matrix) {
+        nlohmann::json jsonData;
+
+        // Запись субъектов
+        for (const auto& subject : matrix.subjects) {
+            jsonData["subjects"].push_back({ {"id", subject.first}, {"name", subject.second} });
+        }
+
+        // Запись записей доступа
+        for (const auto& persmissions : matrix.data) {
+            for (const auto& access : persmissions.second) {
+                char access_char = static_cast<char>(access);
+                jsonData["accessRecords"].push_back({
+                    {"object_id", persmissions.first.second},
+                    {"subject_id", persmissions.first.first},
+                    {"access", access_char}
+                    });
+            }
+        }
+
+        // Запись json в 
+        std::cout << "File: " << filename << std::endl;
+        std::ofstream file(filename, std::ofstream::trunc); // Открытие с очисткой содержимого
+        if (file.is_open()) {
+            file << jsonData.dump(4); // форматируем с отступами для удобства чтения
+            file.close();
+        }
+        else {
+            std::cerr << "Could not open file for writing: " << filename << std::endl;
+        }
     }
 };
