@@ -8,9 +8,9 @@
 #include "Access.cpp"
 #include "SparseMatrix.cpp"
 #include "SparseMatrixJsonReader.cpp"
+#include "CommandExecutor.cpp"
 
-
-int main() {
+int flex() {
     SparseMatrixJsonReader reader("X:\\Studying\\Infobez\\InfoBez_Lab2\\data.json");
     SparseMatrix matrix(1000, 1000);
     reader.read(matrix);
@@ -36,7 +36,13 @@ int main() {
 
     reader.write(matrix);
     std::cout << "Wrote.." << std::endl;
+    return 1;
+}
 
+
+int main() {
+    CommandExecutor executor;
+    executor.run();
     return 0;
 }
 
