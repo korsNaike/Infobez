@@ -9,6 +9,9 @@ project (
     LANGUAGES CXX
 )
 
+set(CMAKE_CXX_STANDARD 17)          # Устанавливаем стандарт C++17
+set(CMAKE_CXX_STANDARD_REQUIRED ON)  # Требуем именно этот стандарт
+
 include_directories (src)
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.cpp")
 file(GLOB_RECURSE HEADERS RELATIVE ${CMAKE_SOURCE_DIR} "src/*.h")
